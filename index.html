@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" type="image/png" href="photo.png" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Image Slider</title>
+  </head>
+  <body>
+    <!-- slider container -->
+    <div class="slider">
+      <!-- slide 1 -->
+      <div class="slide">
+        <img
+          src="https://source.unsplash.com/random?landscape,mountain"
+          alt=""
+        />
+      </div>
+
+      <!-- slide 2 -->
+      <div class="slide">
+        <img src="https://source.unsplash.com/random?landscape,cars" alt="" />
+      </div>
+
+      <!-- slide 3 -->
+      <div class="slide">
+        <img src="https://source.unsplash.com/random?landscape,night" alt="" />
+      </div>
+
+      <!-- slide 4 -->
+      <div class="slide">
+        <img src="https://source.unsplash.com/random?landscape,city" alt="" />
+      </div>
+
+      <!-- Control buttons -->
+      <button class="btn btn-next">></button>
+      <button class="btn btn-prev"><</button>
+    </div>
+    <script>
+      // Select all slides
+      const slides = document.querySelectorAll(".slide");
+      // current slide counter
+      let curSlide = 0;
+
+      // maximum number of slides
+      let maxSlide = slides.length - 1;
+
+      // select next slide button
+      const nextSlide = document.querySelector(".btn-next");
+
+      // add event listener and next slide functionality
+
+      function nextPhoto() {
+        if (curSlide === maxSlide) {
+          curSlide = 0;
+        } else {
+          curSlide++;
+        }
+
+        slides.forEach((slide, indx) => {
+          slide.style.transform = `translateX(${100 * (indx - curSlide)}%)`;
+        });
+      }
+
+      nextSlide.addEventListener("click", nextPhoto);
+
+      setInterval(nextPhoto, 2000);
+
+      const prevSlide = document.querySelector(".btn-prev");
+
+      // add event listener and next slide functionality
+      prevSlide.addEventListener("click", function () {
+        // check if current slide is the last and reset current slide
+        if (curSlide === 0) {
+          curSlide = maxSlide;
+        } else {
+          curSlide--;
+        }
+
+        slides.forEach((slide, indx) => {
+          slide.style.transform = `translateX(${100 * (indx - curSlide)}%)`;
+        });
+      });
+    </script>
+  </body>
+</html>
